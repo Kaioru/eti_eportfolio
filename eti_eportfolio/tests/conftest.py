@@ -31,7 +31,7 @@ def admin_login_page(driver, live_server, django_user_model):
 
 
 @pytest.fixture
-def admin_change_password_page(driver, live_server, admin_login_page):
+def admin_page(driver, admin_login_page):
     driver.find_element_by_name('username').send_keys('admin')
     driver.find_element_by_name('password').send_keys('password')
     driver.find_element_by_name('password').send_keys(Keys.RETURN)
@@ -39,6 +39,9 @@ def admin_change_password_page(driver, live_server, admin_login_page):
     (WebDriverWait(driver, 3)
      .until(EC.presence_of_element_located((By.ID, "user-tools"))))
 
+
+@pytest.fixture
+def admin_change_password_page(driver, live_server, admin_page):
     current_url = driver.current_url
 
     driver.get(live_server.url + '/admin/password_change/')
