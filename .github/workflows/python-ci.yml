@@ -22,9 +22,9 @@ jobs:
         sudo sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
         sudo apt-get -y update
         sudo apt-get -y install google-chrome-stable
-    - name: Install ChromeDriver 79.0.3945.16
+    - name: Install ChromeDriver 78.0.3904.70
       run: |
-        wget -N https://chromedriver.storage.googleapis.com/79.0.3945.16/chromedriver_linux64.zip -P ~/
+        wget -N https://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip -P ~/
         unzip ~/chromedriver_linux64.zip -d ~/
         rm ~/chromedriver_linux64.zip
         sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
