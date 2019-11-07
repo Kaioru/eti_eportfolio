@@ -7,4 +7,9 @@ def driver():
 
     options = webdriver.ChromeOptions()
     options.headless = True
-    return webdriver.Chrome(options=options)
+
+    chrome = webdriver.Chrome(options=options)
+
+    yield chrome
+
+    chrome.close()
