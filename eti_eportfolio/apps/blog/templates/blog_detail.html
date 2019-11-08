@@ -25,11 +25,11 @@
     </form>
     <h3>Comments:</h3>
     {% for comment in comments %}
-    <p>
+    <p id="comment-author">
         On {{comment.created_on.date }}&nbsp;
         <b>{{ comment.author }}</b> wrote:
     </p>
-    <p>{{ comment.body }}</p>
+    <p id="comment-body">{{ comment.body }}</p>
     <hr>
     {% endfor %}
 </div>
