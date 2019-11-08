@@ -29,6 +29,19 @@ def test_view_blog_detail(driver, blog_detail_page):
     assert elem.text == 'A cool title'
 
 
+def test_create_comment_invalid(driver, blog_detail_page):
+    driver.find_element_by_name('author').send_keys('khjqgakmjqdpovnycbmkcatxckvuuyltkvgtvuiblxavfmgtkjuzeygxjsgb12345')
+    driver.find_element_by_name('body').send_keys('Cool blog post!')
+    driver.find_element_by_tag_name('button').click()
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.ID, "comment-body"))))
+
+    author = driver.find_element_by_id('comment-author').find_element_by_tag_name('b')
+    print(author.text)
+    assert author.text == 'khjqgakmjqdpovnycbmkcatxckvuuyltkvgtvuiblxavfmgtkjuzeygxjsgb'
+
+
 def test_create_comment_valid(driver, blog_detail_page):
     driver.find_element_by_name('author').send_keys('Commenter')
     driver.find_element_by_name('body').send_keys('Cool blog post!')
