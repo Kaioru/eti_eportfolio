@@ -57,7 +57,7 @@ ROOT_URLCONF = 'eti_eportfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["eti_eportfolio/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
