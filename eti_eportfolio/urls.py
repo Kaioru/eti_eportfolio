@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.generic import RedirectView
 from .apps.blog import urls as blogUrls
 from .apps.project import urls as projectUrls
 
@@ -25,4 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('blogs/', include(blogUrls)),
     url('projects/', include(projectUrls)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns.append(url('', RedirectView.as_view(url='projects/')))
