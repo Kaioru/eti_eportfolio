@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'eti_eportfolio.apps.blog'
+    'eti_eportfolio.apps.blog',
+    'eti_eportfolio.apps.project'
 ]
 
 MIDDLEWARE = [
