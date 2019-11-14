@@ -1,5 +1,5 @@
 def test_project_index_url(client, live_server):
-    url = live_server.url + '/projects'
+    url = live_server.url + '/projects/'
     response = client.get(url, follow=True)
 
     assert response.status_code == 200

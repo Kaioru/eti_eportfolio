@@ -1,5 +1,5 @@
 def test_blog_index_url(client, live_server):
-    url = live_server.url + '/blogs'
+    url = live_server.url + '/blogs/'
     response = client.get(url, follow=True)
 
     assert response.status_code == 200
