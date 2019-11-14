@@ -29,4 +29,4 @@ urlpatterns = [
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns.append(url('', RedirectView.as_view(url='/projects/')))
+urlpatterns.append(url(r'^.*$', RedirectView.as_view(url='/projects/')))
