@@ -36,9 +36,8 @@ def seed_post(seed_category):
 
 @pytest.fixture
 def seed_comment(seed_post):
-    comment = Comment(author="Keith", body="Hello hello!")
+    comment = Comment(author="Keith", body="Hello hello!", post=seed_post)
     comment.save()
-    seed_post.comments.add(comment)
 
     return comment
 

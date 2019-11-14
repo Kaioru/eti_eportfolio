@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1>{{ post.title }}</h1>
+    <h1 id="post-title">{{ post.title }}</h1>
     <small>
         {{ post.created_on.date }} |&nbsp;
         Categories:&nbsp;
@@ -11,9 +11,9 @@
         </a>&nbsp;
         {% endfor %}
     </small>
-    <p>{{ post.body | linebreaks }}</p>
+    <p id="post-body">{{ post.body | linebreaks }}</p>
     <h3>Leave a comment:</h3>
-    <form action="/blogs/{{ post.pk }}/" method="post">
+    <form action="/blogs/{{ post.pk }}" method="post">
         {% csrf_token %}
         <div class="form-group">
             {{ form.author }}
@@ -21,7 +21,7 @@
         <div class="form-group">
             {{ form.body }}
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
     <h3>Comments:</h3>
     {% for comment in comments %}
