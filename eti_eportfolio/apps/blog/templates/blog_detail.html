@@ -31,6 +31,8 @@
     </p>
     <p id="comment-body">{{ comment.body }}</p>
     <hr>
+    {% empty %}
+    <p id="error">No comments yet..</p>
     {% endfor %}
 </div>
 {% endblock %}
