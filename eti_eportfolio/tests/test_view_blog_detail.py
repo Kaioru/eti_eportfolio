@@ -76,3 +76,20 @@ def test_view_create_comment_invalid(driver, live_server, seed_post):
     b = author.find_element_by_tag_name('b')
 
     assert b.text == 'x' * 60
+
+
+def test_view_create_comment_empty_field(driver, live_server, seed_post):
+
+    driver.get(live_server.url + '/blogs/' + str(seed_post.id))
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.TAG_NAME, "h1"))))
+
+    driver.find_element_by_id('submit').click()
+
+    assert len(driver.find_elements_by_id('comment-author')) == 0
+
+    driver.find_element_by_name('body').send_keys('Cool blog post!')
+    driver.find_element_by_id('submit').click()
+
+    assert len(driver.find_elements_by_id('comment-author')) == 0
