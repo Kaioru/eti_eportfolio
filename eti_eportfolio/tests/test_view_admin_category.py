@@ -48,6 +48,34 @@ def test_view_admin_category_create_too_long(driver, live_server, admin_main_pag
      .until(EC.presence_of_element_located((By.CLASS_NAME, "success"))))
 
 
+def test_view_admin_category_edit_valid(driver, live_server, admin_main_page, seed_category):
+    driver.get(live_server.url + '/admin/blog/category/' +
+               str(seed_category.id) + '/change/')
+
+    driver.find_element_by_name('name').clear()
+    driver.find_element_by_name('name').send_keys('x' * 25)
+
+    assert driver.find_element_by_name(
+        'name').get_attribute("value") == 'x' * 20
+
+    driver.find_element_by_name('_save').click()
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.CLASS_NAME, "success"))))
+
+
+def test_view_admin_category_edit_too_long(driver, live_server, admin_main_page, seed_category):
+    driver.get(live_server.url + '/admin/blog/category/' +
+               str(seed_category.id) + '/change/')
+
+    driver.find_element_by_name('name').clear()
+    driver.find_element_by_name('name').send_keys('Random Category')
+    driver.find_element_by_name('_save').click()
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.CLASS_NAME, "success"))))
+
+
 def test_view_admin_category_delete(driver, live_server, admin_main_page, seed_category):
     driver.get(live_server.url + '/admin/blog/category/')
 
