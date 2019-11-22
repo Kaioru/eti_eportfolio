@@ -50,6 +50,24 @@ def test_admin_login_valid(driver, admin_login_page):
     assert user_tools_elem.find_element_by_tag_name('strong').text == 'ADMIN'
 
 
+def test_admin_login_wrong_password(driver, admin_login_page):
+    driver.find_element_by_name('username').send_keys('admin')
+    driver.find_element_by_name('password').send_keys('abc')
+    driver.find_element_by_name('password').send_keys(Keys.RETURN)
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.CLASS_NAME, "errornote"))))
+
+
+def test_admin_login_wrong_username(driver, admin_login_page):
+    driver.find_element_by_name('username').send_keys('gfds')
+    driver.find_element_by_name('password').send_keys('password')
+    driver.find_element_by_name('password').send_keys(Keys.RETURN)
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.CLASS_NAME, "errornote"))))
+
+
 def test_admin_change_password_wrong_old_password(driver, admin_change_password_page):
     driver.find_element_by_name('old_password').send_keys('wrongOldPassword')
     driver.find_element_by_name('new_password1').send_keys('matchingPassword')
