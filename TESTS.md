@@ -41,7 +41,7 @@ this file documents all the test cases for this project.
 | to test the changing of password with short new password | ```{ "old_password": "password", "new_password1": "abdzxc1", "new_password2": "abdzxc1"}``` | validation fail; show error note
 
 ##### category / comment / post
-*for the sake of redundancy and as these 3 types have similar tests, the tests will be consolidated in 1 section. the values can be found in the test files*
+*for the sake of redundancy and as these 3 types have similar tests, the tests will be consolidated in 1 section. the values can be found in the [test files](https://github.com/Kaioru/eti_eportfolio/tree/master/eti_eportfolio/tests)*
 
 | description | values | expected |
 |:----------- |:------ |:-------- |

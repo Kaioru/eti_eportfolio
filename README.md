@@ -10,3 +10,5 @@ a pretty cool example django project to show testcases and stuff.
 1. Install Google Chrome and Chrome Driver
 2. `pip install -r requirements-test.txt`
 3. `pytest`
+
+check out [TESTS.md](https://github.com/Kaioru/eti_eportfolio/blob/master/TESTS.md) or the [test files](https://github.com/Kaioru/eti_eportfolio/tree/master/eti_eportfolio/tests) for the test cases.
