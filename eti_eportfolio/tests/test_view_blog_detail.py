@@ -1,6 +1,8 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 
 
 def test_view_blog_detail(driver, live_server, seed_post):
@@ -79,7 +81,6 @@ def test_view_create_comment_invalid(driver, live_server, seed_post):
 
 
 def test_view_create_comment_empty_field(driver, live_server, seed_post):
-
     driver.get(live_server.url + '/blogs/' + str(seed_post.id))
 
     (WebDriverWait(driver, 3)
@@ -93,3 +94,26 @@ def test_view_create_comment_empty_field(driver, live_server, seed_post):
     driver.find_element_by_id('submit').click()
 
     assert len(driver.find_elements_by_id('comment-author')) == 0
+
+
+def test_view_create_comment_xss(driver, live_server, seed_post):
+    driver.get(live_server.url + '/blogs/' + str(seed_post.id))
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.TAG_NAME, "h1"))))
+
+    driver.find_element_by_name('author').send_keys('x' * 60)
+    driver.find_element_by_name('body').send_keys(
+        '<script>alert("hello world!")</script>')
+    driver.find_element_by_id('submit').click()
+
+    (WebDriverWait(driver, 3)
+     .until(EC.presence_of_element_located((By.ID, "comment-body"))))
+
+    body = driver.find_element_by_id('comment-body')
+
+    assert body.text == '<script>alert("hello world!")</script>'
+
+    with pytest.raises(TimeoutException):
+        (WebDriverWait(driver, 3)
+         .until(EC.alert_is_present()))
